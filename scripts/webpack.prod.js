@@ -1,7 +1,7 @@
 /*
  * @Author: 鲁田文
  * @Date: 2022-03-02 18:31:45
- * @LastEditTime: 2022-03-23 18:22:25
+ * @LastEditTime: 2022-03-24 10:30:19
  * @LastEditors: 鲁田文
  * @Description: 
  */
@@ -12,7 +12,6 @@ const path = require('path');
 
 const devConfig = {
   mode: 'production',
-  devtool: 'cheap-module-eval-source-map',
 };
 
 module.exports = merge(devConfig, baseConfig);

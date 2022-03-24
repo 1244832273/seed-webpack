@@ -1,7 +1,7 @@
 /*
  * @Author: 鲁田文
  * @Date: 2022-03-02 18:31:45
- * @LastEditTime: 2022-03-23 14:24:31
+ * @LastEditTime: 2022-03-24 10:24:58
  * @LastEditors: 鲁田文
  * @Description: 
  */
@@ -12,7 +12,7 @@ const path = require('path');
 
 const devConfig = {
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
     // static允许我们在DevServer下访问该目录的静态资源
     // 简单理解来说 当我们启动DevServer时相当于启动了一个本地服务器
