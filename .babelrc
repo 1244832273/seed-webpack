@@ -1,7 +1,13 @@
 // .babelrc
 {
   "presets": [
-    "@babel/preset-env",
+    [
+      "@babel/preset-env", // 将基于你的实际浏览器及运行环境，自动的确定babel插件及polyfill
+      {
+        "useBuiltIns": "entry",
+        "modules": false // 意思是不转义import语法，主要是为了tree-shaking
+      }
+    ],
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
@@ -13,5 +19,4 @@
       }
     ]
   ]
-
 }

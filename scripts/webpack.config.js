@@ -1,20 +1,17 @@
-/*
- * @Author: 鲁田文
- * @Date: 2022-03-02 11:43:47
- * @LastEditTime: 2022-03-23 18:36:39
- * @LastEditors: 鲁田文
- * @Description:
- */
+'use strict';
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 自动清空打包目录
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 自动清空打包目录 webpack5 不需要配置output clean就行
+const WebpackBar = require('webpackbar'); // 进度条
 
 module.exports = {
   entry: {
     main: path.resolve(process.cwd(), 'src/main.tsx'),
   },
   output: {
+    clean: true, // 在生成文件之前清空 output 目录
     filename: '[name].[contenthash].js', // 输出文件名
     path: path.join(process.cwd(), 'dist') // 输出文件目录
   },
@@ -39,13 +36,15 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.(sa|sc)ss$/,
+        test: /\.(sa|sc|le|c)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
           'postcss-loader',
+          // 当解析antd.less，必须写成下面格式，否则会报Inline JavaScript is not enabled错误
+          { loader: "less-loader", options: { lessOptions: { javascriptEnabled: true } } },
           {
             loader: 'resolve-url-loader',
           },
@@ -94,6 +93,9 @@ module.exports = {
       filename: 'index.html',
       template: path.resolve(process.cwd(), 'public/index.html'),
     }),
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
+    new WebpackBar({
+      name: process.env.SEED_ENV === 'production' ? '正在打包' : '正在启动',
+    }),
   ],
 };

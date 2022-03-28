@@ -1,18 +1,26 @@
 /*
  * @Author: 鲁田文
  * @Date: 2022-03-02 18:31:45
- * @LastEditTime: 2022-03-24 10:24:58
+ * @LastEditTime: 2022-03-28 16:12:02
  * @LastEditors: 鲁田文
  * @Description: 
  */
+// 环境变量配置
+process.env.SEED_ENV = 'development';
+
 // webpack.dev.js
 const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.config');
 const path = require('path');
+const baseConfig = require('./webpack.config');
+
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 
 const devConfig = {
   mode: 'development',
-  devtool: 'eval-cheap-module-source-map',
+  plugins: [
+    new ErrorOverlayPlugin()
+  ],
+  devtool: 'cheap-module-source-map',
   devServer: {
     // static允许我们在DevServer下访问该目录的静态资源
     // 简单理解来说 当我们启动DevServer时相当于启动了一个本地服务器
