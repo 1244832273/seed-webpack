@@ -1,21 +1,23 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-03-31 14:22:13
- * @LastEditTime: 2021-09-23 11:03:50
+ * @LastEditTime: 2022-03-29 20:11:17
  * @LastEditors: 鲁田文
  * @Description:
  */
 import { format } from 'path';
-import { lazy } from 'react';
+import React, { lazy } from 'react';
 
 import { RoutesOption } from './index';
 import Layout from '@/components/layout';
 
-const Login = lazy(() => import('@/pages/login'));
-const Home = lazy(() => import('@/pages/home'));
-const Auth = lazy(() => import('@/pages/auth'));
-const Auth1 = lazy(() => import('@/pages/auth/index copy'));
-const Auth2 = lazy(() => import('@/pages/auth/index copy 2'));
+const routerMapping = {
+  LOGIN: '@/pages/login',
+  HOME: '@/pages/home',
+  AUTH: '@/pages/auth',
+  AUTH1: '@/pages/auth/index copy',
+  AUTH2: '@/pages/auth/index copy 2',
+}
 
 const CesiumGlobal = lazy(() => import('@/pages/cesium/cesium'));
 
@@ -24,7 +26,7 @@ const permissions = ['admin'];
 const routes: RoutesOption[] = [
   {
     path: '/login',
-    component: Login,
+    component: lazy(() => import(routerMapping.LOGIN)),
     title: '登录',
   },
   {
@@ -46,7 +48,7 @@ const routes: RoutesOption[] = [
     children: [
       {
         path: '/home',
-        component: Home,
+        component: lazy(() => import(routerMapping.HOME)),
         title: '首页',
         meta: {
           menu: true,
@@ -55,7 +57,7 @@ const routes: RoutesOption[] = [
       },
       {
         path: '/home1',
-        component: Auth1,
+        component: lazy(() => import(routerMapping.AUTH1)),
         title: '首页1',
         meta: {
           menu: true,
@@ -63,7 +65,7 @@ const routes: RoutesOption[] = [
       },
       {
         path: '/home2',
-        component: Auth2,
+        component: lazy(() => import(routerMapping.AUTH2)),
         title: '首页2',
         meta: {
           menu: true,
@@ -79,7 +81,7 @@ const routes: RoutesOption[] = [
         children: [
           {
             path: '/activity',
-            component: Auth,
+            component: lazy(() => import(routerMapping.AUTH)),
             title: '活动',
             meta: {
               menu: true,
@@ -88,7 +90,7 @@ const routes: RoutesOption[] = [
           },
           {
             path: '/activity1',
-            component: Auth1,
+            component: lazy(() => import(routerMapping.AUTH1)),
             title: '活动1',
             meta: {
               menu: true,
@@ -97,7 +99,7 @@ const routes: RoutesOption[] = [
           },
           {
             path: '/activity2',
-            component: Auth2,
+            component: lazy(() => import(routerMapping.AUTH2 )),
             title: '活动2',
             meta: {
               menu: true,

@@ -1,8 +1,9 @@
 import React, { ReactNode, useState } from "react";
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import styles from "./style/index.module.styl";
 import MyMenu from "./components/myMenu";
+
+import "./index.less";
 
 const { Header, Content } = Layout;
 
@@ -22,9 +23,9 @@ const Container = (props: ContainerProps) => {
       }}
     >
       <MyMenu collapsed={collapsed} />
-      <Layout className={styles.sitelayout}>
-        <Header className={styles.sitelayoutbackground}>
-          <div className={styles.trigger}>
+      <Layout className='sitelayout'>
+        <Header className='sitelayoutbackground'>
+          <div className='trigger'>
             {collapsed ? (
               <MenuUnfoldOutlined onClick={() => setCollapse(false)} />
             ) : (
@@ -32,7 +33,7 @@ const Container = (props: ContainerProps) => {
             )}
           </div>
         </Header>
-        <Content className={styles.rightContent}>{props.children}</Content>
+        <Content className='rightContent'>{props.children}</Content>
       </Layout>
     </Layout>
   );

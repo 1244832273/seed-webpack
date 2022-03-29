@@ -1,9 +1,9 @@
-import React, { ReactNode, Suspense } from "react";
+import React, { ReactNode, Suspense, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Routes,
+  useNavigate,
 } from "react-router-dom";
 import { Spin } from "antd";
 import routers from "@/router/routers";
@@ -24,8 +24,20 @@ export interface RoutesOption {
   meta?: Meta;
 }
 
+export interface Redirect {
+  to: string;
+}
+
 interface PrivateRouteProps {
   children: ReactNode;
+}
+
+function Redirect({ to }: Redirect) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate(to);
+  });
+  return null;
 }
 
 function AppRouter() {
@@ -41,15 +53,12 @@ function AppRouter() {
     return (
       <Route
         {...rest}
-        render={({ location }) =>
+        element={() =>
           userInfo ? (
             children
           ) : (
             <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
+              to="/login"
             />
           )
         }
@@ -58,7 +67,7 @@ function AppRouter() {
   }
 
   // 递归路由
-  const tileRouter = (routers: RoutesOption[] | undefined, fPath: string = ''): any => {
+  const tileRouter = (routers: RoutesOption[] | undefined, fPath = ''): any => {
     return (
       <Suspense fallback={<Spin tip="加载中..." />}>
         {
@@ -69,8 +78,8 @@ function AppRouter() {
                 <Route
                   key={mergePath}
                   path={mergePath}
-                  render={() => {
-                    return <Suspense fallback={<Spin tip="加载中..." />}>{React.createElement(x.component || Switch, {}, tileRouter(x.children, mergePath))}</Suspense>;
+                  element={() => {
+                    return <Suspense fallback={<Spin tip="加载中..." />}>{React.createElement(x.component || Routes, {}, tileRouter(x.children, mergePath))}</Suspense>;
                   }}
                 />
               );
@@ -79,7 +88,7 @@ function AppRouter() {
                 <Route
                   key={mergePath}
                   path={mergePath}
-                  component={x.component}
+                  element={x.component}
                 />
               );
             }
@@ -91,19 +100,19 @@ function AppRouter() {
 
   return (
     <Router>
-      <Switch>
-        <Redirect from="/" to="/login" exact />
+      <Routes>
+        {/* <Redirect from="/" to="/login" exact /> */}
         <PrivateRoute>
           <Suspense fallback={<Spin tip="加载中..." />}>
-            <Switch>
+            <Routes>
               {tileRouter(newRouters)}
-            </Switch>
+            </Routes>
           </Suspense>
         </PrivateRoute>
         <Route path="*">
           <h1>404</h1>
         </Route>
-      </Switch>
+      </Routes>
     </Router>
   );
 };

@@ -1,8 +1,8 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-04-23 16:13:19
- * @LastEditTime: 2021-06-16 16:04:42
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-29 20:25:09
+ * @LastEditors: 鲁田文
  * @Description: loading 分页table
  */
 import React, { useState, useEffect } from "react";
@@ -109,7 +109,6 @@ function useAntTable({
       pageSize: pagination.pageSize,
     };
     fetch(params);
-    return () => {};
   }, [refreshKey]);
 
   return {

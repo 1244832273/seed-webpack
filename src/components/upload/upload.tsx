@@ -1,7 +1,7 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-04-24 17:06:59
- * @LastEditTime: 2021-05-24 14:27:38
+ * @LastEditTime: 2022-03-29 20:25:30
  * @LastEditors: 鲁田文
  * @Description:
  */
@@ -62,7 +62,6 @@ function CustomizeUpload(props: CustomizeUploadProps) {
   // 设置初始化文件
   useEffect(() => {
     initFiles.length && setFileList(initFiles);
-    return () => {};
   }, [initFiles.length]);
 
   // 预览处理
@@ -80,11 +79,11 @@ function CustomizeUpload(props: CustomizeUploadProps) {
   // 判断最大高度和宽度限制条件
   const isSize = (file: any) => {
     return new Promise((resolve, reject) => {
-      let _URL = window.URL || window.webkitURL;
-      let img = new Image();
+      const _URL = window.URL || window.webkitURL;
+      const img = new Image();
       img.onload = function () {
         if (maxWidth && maxHeight) {
-          let valid = img.width == maxWidth && img.height == maxHeight;
+          const valid = img.width == maxWidth && img.height == maxHeight;
           valid ? resolve(file) : reject(false);
         } else {
           resolve(file);

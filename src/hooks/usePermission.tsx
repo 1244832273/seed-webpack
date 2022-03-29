@@ -1,7 +1,7 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-06-02 15:44:15
- * @LastEditTime: 2021-07-02 11:52:09
+ * @LastEditTime: 2022-03-29 20:23:12
  * @LastEditors: 鲁田文
  * @Description:
  */
@@ -47,7 +47,6 @@ function usePermission({ routers }: usePermissionProps) {
     const auth = 'admin';
     const newRouter = permission(routers, auth);
     setRouterAuth(newRouter);
-    return () => { };
   }, []);
   
   return routerAuth;
