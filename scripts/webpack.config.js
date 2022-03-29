@@ -10,11 +10,6 @@ module.exports = {
   entry: {
     main: path.resolve(process.cwd(), 'src/main.tsx'),
   },
-  output: {
-    clean: true, // 在生成文件之前清空 output 目录
-    filename: '[name].[contenthash].js', // 输出文件名
-    path: path.join(process.cwd(), 'dist') // 输出文件目录
-  },
   resolve: {
     alias: {
       Src: path.resolve(process.cwd(), 'src'),
