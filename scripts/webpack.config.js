@@ -8,7 +8,7 @@ const WebpackBar = require('webpackbar'); // 进度条
 
 module.exports = {
   entry: {
-    main: path.resolve(process.cwd(), 'src/main.tsx'),
+    main: path.resolve(process.cwd(), 'src/index.tsx'),
   },
   resolve: {
     alias: {

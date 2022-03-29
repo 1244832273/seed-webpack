@@ -1,20 +1,20 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-04-08 14:22:35
- * @LastEditTime: 2021-07-02 11:37:26
+ * @LastEditTime: 2022-03-29 20:30:50
  * @LastEditors: 鲁田文
  * @Description:
  */
 import React from "react";
 import { Layout, Menu } from "antd";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MenuInfo } from "rc-menu/lib/interface";
 import { MenuOutlined } from "@ant-design/icons";
 
 import routers from "@/router/routers";
 import { RoutesOption } from "@/router/index";
 import usePermission from "@/hooks/usePermission";
-import styles from "../style/index.module.styl";
+import '../index.less';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -24,7 +24,7 @@ interface MenuProps {
 }
 
 function MyMenu({ collapsed }: MenuProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // 过滤菜单
   const menuRouter = routers.find(x => x?.meta?.menu); // layout路由
@@ -32,11 +32,11 @@ function MyMenu({ collapsed }: MenuProps) {
 
   // menu开关
   const handleClickSiderMenu = (info: MenuInfo) => {
-    history.push(String(info.key));
+    navigate(String(info.key));
   };
 
   // 递归出菜单
-  const getAllMenu = (routers: RoutesOption[], fPath: string = '') => {
+  const getAllMenu = (routers: RoutesOption[], fPath = '') => {
     return (
       routers?.map(x => (
         x.children ?
@@ -53,12 +53,12 @@ function MyMenu({ collapsed }: MenuProps) {
 
   return (
     <Sider
-      className={styles.mysider}
+      className='mysider'
       trigger={null}
       collapsible
       collapsed={collapsed}
     >
-      <div className={styles.logo} />
+      <div className='logo' />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["/auth/activity"]} onClick={handleClickSiderMenu}>
         {
           getAllMenu(newRouters, menuRouter?.path || '')
