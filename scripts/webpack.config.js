@@ -12,6 +12,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@': path.resolve(process.cwd(), 'src'),
       Src: path.resolve(process.cwd(), 'src'),
       Pages: path.resolve(process.cwd(), 'src/pages'),
       Assets: path.resolve(process.cwd(), 'src/assets'),
