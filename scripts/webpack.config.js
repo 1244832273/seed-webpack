@@ -18,7 +18,7 @@ module.exports = {
       Assets: path.resolve(process.cwd(), 'src/assets'),
     },
     mainFiles: ['index', 'main'], // 解析目录时要使用的文件名
-    extensions: ['.ts', '.tsx', '.scss', 'json', '.js'], // 配置文件不带后缀名 解析顺序
+    extensions: ['.ts', '.tsx', '.jsx', '.js', '.scss', 'json'], // 配置文件不带后缀名 解析顺序
     modules: [
       'node_modules',
       path.resolve(process.cwd(), 'src'),

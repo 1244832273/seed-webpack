@@ -1,120 +1,39 @@
-import React, { ReactNode, Suspense, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
-import { Spin } from "antd";
-import routers from "@/router/routers";
-import usePermission from "@/hooks/usePermission";
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router-dom'
+import { Spin } from 'antd'
 
-export interface Meta {
-  menu?: boolean; // 是否在左侧菜单上展示
-  permissions?: string[]; // 权限组 没有时直接放行 不校验权限
-}
-
-export interface RoutesOption {
-  path: string;
-  component?:
-  | React.LazyExoticComponent<(props: any) => JSX.Element>
-  | ((props: any) => JSX.Element);
-  title?: string;
-  children?: RoutesOption[];
-  meta?: Meta;
-}
-
-export interface Redirect {
-  to: string;
-}
-
-interface PrivateRouteProps {
-  children: ReactNode;
-}
-
-function Redirect({ to }: Redirect) {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(to);
-  });
-  return null;
-}
+import routes from '@/router/routers'
+import usePermission from '@/hooks/usePermission'
+import { RoutesOption } from './router.types'
 
 function AppRouter() {
   // 过滤权限组路由
-  console.log(`Router`, routers);
-  const newRouters = usePermission({ routers }); // 过滤权限后路由
-  console.log(`newRouter`, newRouters);
+  const newRouters = usePermission({ routes }) // 过滤权限后路由
+  console.log(`newRouter`, newRouters)
 
-  // 权限控制路由
-  const PrivateRoute = (props: PrivateRouteProps) => {
-    const { children, ...rest } = props;
-    const userInfo = true;
-    return (
-      <Route
-        {...rest}
-        element={() =>
-          userInfo ? (
-            children
-          ) : (
-            <Redirect
-              to="/login"
-            />
-          )
-        }
-      />
-    );
-  }
+  const tileRouter = (permssionRoutes: RoutesOption[], parentPath = '') =>
+    permssionRoutes.map(x => {
+      const { path, Component, children } = x
+      const newPath = parentPath + path
+      return children ? (
+        <Route path={newPath} key={newPath} element={<Component />}>
+          {tileRouter(children, newPath)}
+        </Route>
+      ) : (
+        <Route key={newPath} path={newPath} element={<Component />} />
+      )
+    })
 
-  // 递归路由
-  const tileRouter = (routers: RoutesOption[] | undefined, fPath = ''): any => {
-    return (
-      <Suspense fallback={<Spin tip="加载中..." />}>
-        {
-          routers?.map(x => {
-            const mergePath = fPath + x.path;
-            if(x.children && x.children.length > 0) {
-              return (
-                <Route
-                  key={mergePath}
-                  path={mergePath}
-                  element={() => {
-                    return <Suspense fallback={<Spin tip="加载中..." />}>{React.createElement(x.component || Routes, {}, tileRouter(x.children, mergePath))}</Suspense>;
-                  }}
-                />
-              );
-            } else {
-              return (
-                <Route
-                  key={mergePath}
-                  path={mergePath}
-                  element={x.component}
-                />
-              );
-            }
-          })
-        }
-      </Suspense>
-    )
-  }
+  console.log('tileRouter(newRouters) :>> ', tileRouter(newRouters))
 
   return (
     <Router>
       <Routes>
-        {/* <Redirect from="/" to="/login" exact /> */}
-        <PrivateRoute>
-          <Suspense fallback={<Spin tip="加载中..." />}>
-            <Routes>
-              {tileRouter(newRouters)}
-            </Routes>
-          </Suspense>
-        </PrivateRoute>
-        <Route path="*">
-          <h1>404</h1>
-        </Route>
+        <Route path='/' element={<Navigate to='/manage/home' />}></Route>
+        {tileRouter(newRouters)}
       </Routes>
     </Router>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter

@@ -1,52 +1,45 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-03-31 14:22:13
- * @LastEditTime: 2022-03-29 21:00:06
+ * @LastEditTime: 2022-03-30 19:36:34
  * @LastEditors: 鲁田文
  * @Description:
  */
-import { format } from 'path';
 import React, { lazy } from 'react';
 
-import { RoutesOption } from './index';
+import { RoutesOption } from './router.types';
 import Layout from '@/components/layout';
 
-const Login = lazy(() => import('@/pages/login'));
-const Home = lazy(() => import('@/pages/home'));
-const Auth = lazy(() => import('@/pages/auth'));
-const Auth1 = lazy(() => import('@/pages/auth/index copy'));
-const Auth2 = lazy(() => import('@/pages/auth/index copy 2'));
-
-const CesiumGlobal = lazy(() => import('@/pages/cesium/cesium'));
+// const CesiumGlobal = lazy(() => import('@/pages/cesium/cesium'));
 
 const permissions = ['admin'];
 
 const routes: RoutesOption[] = [
   {
     path: '/login',
-    component: Login,
+    Component: lazy(() => import('@/pages/login')),
     title: '登录',
   },
   {
     path: '/404',
-    component: () => <div>404</div>,
+    Component: () => <div>404</div>,
     title: '404',
   },
-  {
-    path: '/cesium',
-    component: CesiumGlobal,
-    title: '地图',
-  },
+  // {
+  //   path: '/cesium',
+  //   Component: CesiumGlobal,
+  //   title: '地图',
+  // },
   {
     path: '/manage',
-    component: Layout,
+    Component: Layout,
     meta: {
       menu: true,
     },
     children: [
       {
         path: '/home',
-        component: Home,
+        Component: lazy(() => import('@/pages/home')),
         title: '首页',
         meta: {
           menu: true,
@@ -55,7 +48,7 @@ const routes: RoutesOption[] = [
       },
       {
         path: '/home1',
-        component: Auth1,
+        Component: lazy(() => import('@/pages/auth/index copy')),
         title: '首页1',
         meta: {
           menu: true,
@@ -63,7 +56,7 @@ const routes: RoutesOption[] = [
       },
       {
         path: '/home2',
-        component: Auth2,
+        Component: lazy(() => import('@/pages/auth/index copy 2')),
         title: '首页2',
         meta: {
           menu: true,
@@ -79,7 +72,7 @@ const routes: RoutesOption[] = [
         children: [
           {
             path: '/activity',
-            component: Auth,
+            Component: lazy(() => import('@/pages/auth')),
             title: '活动',
             meta: {
               menu: true,
@@ -88,7 +81,7 @@ const routes: RoutesOption[] = [
           },
           {
             path: '/activity1',
-            component: Auth1,
+            Component: lazy(() => import('@/pages/auth/index copy')),
             title: '活动1',
             meta: {
               menu: true,
@@ -97,7 +90,7 @@ const routes: RoutesOption[] = [
           },
           {
             path: '/activity2',
-            component: Auth2,
+            Component: lazy(() => import('@/pages/auth/index copy 2')),
             title: '活动2',
             meta: {
               menu: true,
