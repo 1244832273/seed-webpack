@@ -4,27 +4,29 @@ import { Spin } from 'antd'
 
 import routes from '@/router/routers'
 import usePermission from '@/hooks/usePermission'
-import { RoutesOption } from './router.types'
+import { RoutesOption } from './routers.types'
 
 function AppRouter() {
   // 过滤权限组路由
   const newRouters = usePermission({ routes }) // 过滤权限后路由
-  console.log(`newRouter`, newRouters)
 
   const tileRouter = (permssionRoutes: RoutesOption[], parentPath = '') =>
     permssionRoutes.map(x => {
       const { path, Component, children } = x
       const newPath = parentPath + path
+      const renderDom = () => (
+        <Suspense fallback={<Spin tip='加载中...' />}>
+          <Component />
+        </Suspense>
+      )
       return children ? (
-        <Route path={newPath} key={newPath} element={<Component />}>
+        <Route path={newPath} key={newPath} element={renderDom()}>
           {tileRouter(children, newPath)}
         </Route>
       ) : (
-        <Route key={newPath} path={newPath} element={<Component />} />
+        <Route key={newPath} path={newPath} element={renderDom()} />
       )
     })
-
-  console.log('tileRouter(newRouters) :>> ', tileRouter(newRouters))
 
   return (
     <Router>

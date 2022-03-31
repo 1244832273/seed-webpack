@@ -1,5 +1,11 @@
-import React from "react";
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 export default function index() {
-  return <div>auth</div>;
+  return (
+    <div>
+      auth
+      <Outlet />
+    </div>
+  )
 }

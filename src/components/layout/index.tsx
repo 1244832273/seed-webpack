@@ -1,25 +1,27 @@
-import React, { ReactNode, useState } from "react";
-import { Layout } from "antd";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import MyMenu from "./components/myMenu";
+import React, { ReactNode, useState } from 'react'
+import { Layout } from 'antd'
+import { Outlet } from 'react-router-dom'
 
-import "./index.less";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import MyMenu from './components/myMenu'
 
-const { Header, Content } = Layout;
+import './index.less'
+
+const { Header, Content } = Layout
 
 interface ContainerProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const Container = (props: ContainerProps) => {
-  const [collapsed, setCollapse] = useState<boolean>(false);
+  const [collapsed, setCollapse] = useState<boolean>(false)
 
   return (
     <Layout
       style={{
-        maxHeight: "100vh",
-        minHeight: "100vh",
-        backgroundColor: "#F1F2F6",
+        maxHeight: '100vh',
+        minHeight: '100vh',
+        backgroundColor: '#F1F2F6',
       }}
     >
       <MyMenu collapsed={collapsed} />
@@ -33,10 +35,12 @@ const Container = (props: ContainerProps) => {
             )}
           </div>
         </Header>
-        <Content className='rightContent'>{props.children}</Content>
+        <Content className='rightContent'>
+          <Outlet />
+        </Content>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default Container;
+export default Container

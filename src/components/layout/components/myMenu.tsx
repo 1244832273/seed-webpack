@@ -1,7 +1,7 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-04-08 14:22:35
- * @LastEditTime: 2022-03-29 20:30:50
+ * @LastEditTime: 2022-03-31 10:57:05
  * @LastEditors: 鲁田文
  * @Description:
  */
@@ -12,7 +12,7 @@ import { MenuInfo } from "rc-menu/lib/interface";
 import { MenuOutlined } from "@ant-design/icons";
 
 import routers from "@/router/routers";
-import { RoutesOption } from "@/router/index";
+import { RoutesOption } from "@/router/routers.types"
 import usePermission from "@/hooks/usePermission";
 import '../index.less';
 
@@ -28,7 +28,7 @@ function MyMenu({ collapsed }: MenuProps) {
 
   // 过滤菜单
   const menuRouter = routers.find(x => x?.meta?.menu); // layout路由
-  const newRouters = usePermission({ routers: menuRouter?.children || [] }); // 过滤权限后路由
+  const newRouters = usePermission({ routes: menuRouter?.children || [] }); // 过滤权限后路由
 
   // menu开关
   const handleClickSiderMenu = (info: MenuInfo) => {

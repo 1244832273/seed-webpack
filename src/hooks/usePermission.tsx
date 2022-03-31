@@ -1,14 +1,14 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-06-02 15:44:15
- * @LastEditTime: 2022-03-30 17:53:50
+ * @LastEditTime: 2022-03-31 10:56:07
  * @LastEditors: 鲁田文
  * @Description:
  */
 
 import { useState, useEffect } from 'react'
 
-import { RoutesOption } from '@/router/router.types'
+import { RoutesOption } from '@/router/routers.types'
 
 export interface usePermissionProps {
   routes: RoutesOption[]

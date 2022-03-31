@@ -20,7 +20,6 @@ export default function Index() {
 
   useEffect(() => {
     handleClickLogin()
-    return () => {}
   }, [])
   return <div>home</div>
 }

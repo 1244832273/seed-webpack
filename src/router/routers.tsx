@@ -1,13 +1,13 @@
 /*
  * @Author: 鲁田文
  * @Date: 2021-03-31 14:22:13
- * @LastEditTime: 2022-03-30 19:36:34
+ * @LastEditTime: 2022-03-31 11:25:22
  * @LastEditors: 鲁田文
  * @Description:
  */
 import React, { lazy } from 'react';
 
-import { RoutesOption } from './router.types';
+import { RoutesOption } from './routers.types';
 import Layout from '@/components/layout';
 
 // const CesiumGlobal = lazy(() => import('@/pages/cesium/cesium'));
@@ -64,21 +64,13 @@ const routes: RoutesOption[] = [
       },
       {
         path: '/auth',
+        Component: lazy(() => import('@/pages/auth')),
         title: '活动主体',
         meta: {
           menu: true,
           permissions: [...permissions],
         },
         children: [
-          {
-            path: '/activity',
-            Component: lazy(() => import('@/pages/auth')),
-            title: '活动',
-            meta: {
-              menu: true,
-              permissions: [...permissions],
-            },
-          },
           {
             path: '/activity1',
             Component: lazy(() => import('@/pages/auth/index copy')),
@@ -95,6 +87,15 @@ const routes: RoutesOption[] = [
             meta: {
               menu: true,
               permissions: ['user1'],
+            },
+          },
+          {
+            path: '/activity3',
+            Component: lazy(() => import('@/pages/auth/index copy 2')),
+            title: '活动3',
+            meta: {
+              menu: true,
+              permissions: [...permissions],
             },
           },
         ],

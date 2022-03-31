@@ -10,6 +10,10 @@ module.exports = {
   entry: {
     main: path.resolve(process.cwd(), 'src/index.tsx'),
   },
+  output: {
+    filename: '[name].[contenthash].js', // 输出文件名
+    path: path.join(process.cwd(), 'dist') // 输出文件目录
+  },
   resolve: {
     alias: {
       '@': path.resolve(process.cwd(), 'src'),
