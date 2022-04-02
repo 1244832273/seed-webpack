@@ -11,17 +11,21 @@ function AppRouter() {
   const newRouters = usePermission({ routes }) // 过滤权限后路由
 
   const tileRouter = (permssionRoutes: RoutesOption[], parentPath = '') =>
-    permssionRoutes.map(x => {
-      const { path, Component, children } = x
+    permssionRoutes.map(({ path, Component, children, redirect }) => {
       const newPath = parentPath + path
       const renderDom = () => (
         <Suspense fallback={<Spin tip='加载中...' />}>
           <Component />
         </Suspense>
       )
-      return children ? (
+      return children?.length ? (
         <Route path={newPath} key={newPath} element={renderDom()}>
           {tileRouter(children, newPath)}
+          {redirect ? (
+            <Route path={newPath} element={<Navigate to={redirect} />}></Route>
+          ) : (
+            <Route path={newPath} element={<Navigate to={newPath + children[0].path} />}></Route>
+          )}
         </Route>
       ) : (
         <Route key={newPath} path={newPath} element={renderDom()} />
@@ -31,7 +35,7 @@ function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Navigate to='/manage/home' />}></Route>
+        <Route path='/' element={<Navigate to='/manage/home' />} />
         {tileRouter(newRouters)}
       </Routes>
     </Router>

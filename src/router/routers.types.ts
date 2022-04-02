@@ -6,6 +6,7 @@ export interface Meta {
 export interface RoutesOption {
   path: string;
   Component?: any;
+  redirect?: string;
   title?: string;
   children?: RoutesOption[];
   meta?: Meta;
