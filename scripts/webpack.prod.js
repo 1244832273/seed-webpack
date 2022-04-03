@@ -6,6 +6,7 @@
  * @Description: 
  */
 // 环境变量配置
+process.env.NODE_ENV = 'production';
 process.env.SEED_ENV = 'production';
 
 // webpack.prod.js

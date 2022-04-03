@@ -6,7 +6,11 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 自动清空打包目录 webpack5 不需要配置output clean就行
 const WebpackBar = require('webpackbar'); // 进度条
 
+const useBuildConfig = process.env.NODE_ENV === 'production';
+
 module.exports = {
+  // 在第一个错误出现时抛出失败结果，而不是容忍它。默认情况下，当使用 HMR 时，webpack 会将在终端以及浏览器控制台中，以红色文字记录这些错误，但仍然继续进行打包。
+  bail: !useBuildConfig,
   entry: {
     main: path.resolve(process.cwd(), 'src/main.tsx'),
   },
@@ -90,7 +94,7 @@ module.exports = {
     }),
     // new CleanWebpackPlugin(),
     new WebpackBar({
-      name: process.env.SEED_ENV === 'production' ? '正在打包' : '正在启动',
+      name: useBuildConfig ? '正在打包' : '正在启动',
     }),
   ],
 };
