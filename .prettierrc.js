@@ -8,4 +8,5 @@ module.exports = {
   trailingComma: 'es5', // 尾随逗号
   arrowParens: 'avoid', // 箭头函数仅在必要时使用()
   htmlWhitespaceSensitivity: 'css', // html空格敏感度
+  jsxBracketSameLine: false, // 在jsx中把'>' 放同一行
 }

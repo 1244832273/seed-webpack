@@ -28,5 +28,6 @@ module.exports = {
     "rules": {
       // 重新配置 react-hooks 相关内容
       "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     }
 }
