@@ -1,0 +1,83 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@seedltw/eslint-config-seed': ^0.1.1
+  '@types/react': ^18.0.10
+  '@types/react-dom': ^18.0.5
+  react: ^18.1.0
+  react-dom: ^18.1.0
+
+dependencies:
+  react: 18.1.0
+  react-dom: 18.1.0_react@18.1.0
+
+devDependencies:
+  '@seedltw/eslint-config-seed': 0.1.1
+  '@types/react': 18.0.10
+  '@types/react-dom': 18.0.5
+
+packages:
+
+  /@seedltw/eslint-config-seed/0.1.1:
+    resolution: {integrity: sha512-tVNnYKbcL+qOSfl1f0oEixanuRdJOT9b3qBZhYwHvcCsNdz+dlF89/UCBeeA+vis2PcoWrb7MlW5SWjedu8yVg==}
+    dev: true
+
+  /@types/prop-types/15.7.5:
+    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: true
+
+  /@types/react-dom/18.0.5:
+    resolution: {integrity: sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA==}
+    dependencies:
+      '@types/react': 18.0.10
+    dev: true
+
+  /@types/react/18.0.10:
+    resolution: {integrity: sha512-dIugadZuIPrRzvIEevIu7A1smqOAjkSMv8qOfwPt9Ve6i6JT/FQcCHyk2qIAxwsQNKZt5/oGR0T4z9h2dXRAkg==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.2
+      csstype: 3.1.0
+    dev: true
+
+  /@types/scheduler/0.16.2:
+    resolution: {integrity: sha1-GmL4lSVyPd4kuhsBsJK/XfitTTk=}
+    dev: true
+
+  /csstype/3.1.0:
+    resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
+    dev: true
+
+  /js-tokens/4.0.0:
+    resolution: {integrity: sha1-GSA/tZmR35jjoocFDUZHzerzJJk=}
+    dev: false
+
+  /loose-envify/1.4.0:
+    resolution: {integrity: sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=}
+    hasBin: true
+    dependencies:
+      js-tokens: 4.0.0
+    dev: false
+
+  /react-dom/18.1.0_react@18.1.0:
+    resolution: {integrity: sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w==}
+    peerDependencies:
+      react: ^18.1.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.1.0
+      scheduler: 0.22.0
+    dev: false
+
+  /react/18.1.0:
+    resolution: {integrity: sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
+  /scheduler/0.22.0:
+    resolution: {integrity: sha512-6QAm1BgQI88NPYymgGQLCZgvep4FyePDWFpXVK+zNSUgHwlqpJy8VEh8Et0KxTACS4VWwMousBElAZOH9nkkoQ==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
