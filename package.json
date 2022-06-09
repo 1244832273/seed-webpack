@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "seed dev",
+    "build": "seed build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
